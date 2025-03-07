@@ -12,22 +12,26 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion(
-        value: SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-            overlays: [SystemUiOverlay.top]),
-        child: AnnotatedRegion<SystemUiOverlayStyle>(
-            value: SystemUiOverlayStyle(
-              statusBarColor: Colors.transparent,
-              statusBarIconBrightness: Brightness.light,
-              systemNavigationBarColor: Colors.black,
-              systemNavigationBarIconBrightness: Brightness.light,
-            ),
-            child: FlutterSplashScreen.fadeIn(
-              childWidget: SizedBox(
-                height: 200,
-                width: 200,
-                child: Image.asset("assets/images/splash.jpg"),
-              ),
-              onAnimationEnd: () => context.router.push(const HomeRoute()),
-            )));
+      value: SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+          overlays: [SystemUiOverlay.top]),
+      child: AnnotatedRegion<SystemUiOverlayStyle>(
+        value: SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarIconBrightness: Brightness.light,
+          systemNavigationBarColor: Colors.black,
+          systemNavigationBarIconBrightness: Brightness.light,
+        ),
+        child: FlutterSplashScreen(
+          splashScreenBody: Image.asset(
+            "assets/images/splash.jpg",
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            fit: BoxFit.cover,
+          ),
+          duration: Duration(seconds: 5),
+          onEnd: () => context.router.push(const HomeRoute()),
+        ),
+      ),
+    );
   }
 }
